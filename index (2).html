@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://static.vecteezy.com/system/resources/previews/004/941/083/original/cosmetic-background-for-product-branding-and-packaging-presentation-geometry-form-square-molding-on-podium-stage-with-shadow-of-leaf-background-illustration-design-vector.jpg');
+            background-color: pink;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: lite pink;
+            border-radius: 50px;
+            border: 2px solid black;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+        #details {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        #details p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Details Entered</h2>
+        <div id="details"></div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            var queryString = window.location.search;
+            var urlParams = new URLSearchParams(queryString);
+            var detailsDiv = document.getElementById('details');
+
+            detailsDiv.innerHTML += "<p><strong>Name:</strong> " + urlParams.get('name') + "</p>";
+            detailsDiv.innerHTML += "<p><strong>Email:</strong> " + urlParams.get('email') + "</p>";
+            detailsDiv.innerHTML += "<p><strong>DOB:</strong> " + urlParams.get('dob') + "</p>";
+            detailsDiv.innerHTML += "<p><strong>Gender:</strong> " + urlParams.get('gender') + "</p>";
+            detailsDiv.innerHTML += "<p><strong>Blood Group:</strong> " + urlParams.get('blood_group') + "</p>";
+            detailsDiv.innerHTML += "<p><strong>Educational Qualification:</strong> " + urlParams.get('education') + "</p>";
+            detailsDiv.innerHTML += "<p><strong>Branch:</strong> " + urlParams.get('branch') + "</p>";
+            detailsDiv.innerHTML += "<p><strong>Address:</strong> " + urlParams.get('address') + "</p>";
+            detailsDiv.innerHTML += "<p><strong>Phone Number:</strong> " + urlParams.get('phone') + "</p>";
+        };
+    </script>
+</body>
+</html>
