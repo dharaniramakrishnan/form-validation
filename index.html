@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Form Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://static.vecteezy.com/system/resources/previews/004/941/083/original/cosmetic-background-for-product-branding-and-packaging-presentation-geometry-form-square-molding-on-podium-stage-with-shadow-of-leaf-background-illustration-design-vector.jpg');
+            background-color: pink;
+        }
+        .container {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 2px solid black;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;
+            max-width: 600px;
+            padding: 20px;
+        }
+        h2 {
+            font-family: Algerian;
+            text-align: center;
+            color: #461114;
+            margin-top: 0;
+        }
+        .form-section {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="password"], 
+        textarea,
+        select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            background-color: #460808;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #5f0909;
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Form!</h2>
+        <form action="next_page.html" id="registrationForm" method="get" onsubmit="return validateForm()">
+            <div class="form-section">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter a name....." required>
+                <div class="error-message" id="name-error"></div>
+            </div>
+
+            <div class="form-section">
+                <label for="dob">DOB:</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+
+            <div class="form-section">
+                <label>Gender:</label>
+                <input type="radio" id="male" name="gender" value="male" required>
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="female" required>
+                <label for="female">Female</label>
+                <div class="error-message" id="gender-error"></div>
+            </div>
+            <div class="form-section">
+                <label for="email">Mail id:</label>
+                <input type="email" id="email" name="email" placeholder="Enter a email....." required>
+                <div class="error-message" id="email-error"></div>
+            </div>
+            <div class="form-section">
+                <label for="blood_group">Blood Group:</label>
+                <input type="text" id="blood_group" name="blood_group" placeholder="Enter a blood group" required>
+                <div class="error-message" id="blood-group-error"></div>
+            </div>
+            <div class="form-section">
+                <label for="education">Educational Qualification:</label>
+                <input type="text" id="education" name="education" placeholder="Enter a educational qualfcation....." required>
+                <div class="error-message" id="education-error"></div>
+            </div>
+            <div class="form-section">
+                <label for="branch">Branch:</label>
+                <select id="branch" name="branch">
+                    <option value="COMPUTER SCIENCE AND ENGINEERING">COMPUTER SCIENCE AND ENGINEERING</option>
+                    <option value="INFORMATION TECHNOLOGY">INFORMATION TECHNOLOGY</option>
+                    <option value="MECHANICAL ENGINEERING">MECHANICAL ENGINEERING</option>
+                    <option value="CIVIL ENGINEERING">CIVIL ENGINEERING</option>
+                    <option value="ELECTRONICS AND COMMUNICATION ENGINEERING">ELECTRONICS AND COMMUNICATION ENGINEERING</option>
+                    <option value="CHEMICAL ENGINEERING">CHEMICAL ENGINEERING</option>
+                    <option value="MECHATRONICS ENGINEERING">MECHATRONICS ENGINEERING</option>
+                </select>
+            </div>
+            <div class="form-section">
+                <label for="address">Address:</label>
+                <textarea id="address" name="address" rows="4" placeholder="Enter a address....." required></textarea>
+                <div class="error-message" id="address-error"></div>
+            </div>
+            <div class="form-section">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter a phone number...." required>
+                <div class="error-message" id="phone-error"></div>
+            </div>
+            <div class="form-section">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-section">
+                <input type="checkbox" id="information_true" required>
+                <label for="information_true">Agree terms and condition.</label>
+                <div class="error-message" id="information-error"></div>
+            </div>
+            <div class="form-section">
+                <input type="checkbox" id="affirmation_true" required>
+                <label for="affirmation_true">I affirm that the above information is true.</label>
+                <div class="error-message" id="affirmation-error"></div>
+            </div>
+            <div class="form-section">
+                <input type="submit" value="REGISTER">
+            </div>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var formFields = document.querySelectorAll('.form-section input, .form-section select, .form-section textarea');
+            formFields.forEach(function (field, index) {
+                field.addEventListener('input', function () {
+                    if (index < formFields.length - 1 && field.value.trim() !== '') {
+                        formFields[index + 1].focus();
+                    }
+                });
+            });
+        });
+    <script>
+        function validateForm() {
+            var name = document.getElementById("name").value.trim();
+            var email = document.getElementById("email").value.trim();
+            var educationqualification = document.getElementById("education").value.trim();
+            var phoneNumber = document.getElementById("phone").value.trim();
+            var bloodGroup = document.getElementById("blood_group").value.trim();
+            var genderSelected = document.querySelector('input[name="gender"]:checked');
+            var affirmationCheckbox = document.getElementById("affirmation_true");
+
+            var namePattern = /^[a-zA-Z\s]+$/;
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            var bloodGroupPattern = /^(A|B|AB|O)[+-]$/;
+            var phonePattern = /^\d{10}$/;
+
+            document.querySelectorAll('.error-message').forEach(function (el) {
+                el.innerHTML = '';
+            });
+
+            if (!namePattern.test(name)) {
+                document.getElementById("name-error").innerHTML = "Name should only contain letters and spaces.";
+                return false;
+            }
+             alert("Name entered successfully. Proceeding to the next step.");
+
+            if (!emailPattern.test(email)) {
+                document.getElementById("email-error").innerHTML = "Please enter a valid email address.";
+                return false;
+            }
+
+            if (!namePattern.test(educationqualification)) {
+                document.getElementById("education-error").innerHTML = "Education qualification should contain names and spaces.";
+                return false;
+            }
+
+            if (!bloodGroupPattern.test(bloodGroup)) {
+                document.getElementById("blood-group-error").innerHTML = "Please enter a valid blood group (e.g., A+, A-, B+, AB+, AB-, O+, O-).";
+                return false;
+            }
+
+            if (!genderSelected) {
+                document.getElementById("gender-error").innerHTML = "Please select a gender.";
+                return false;
+            }
+
+            if (!phonePattern.test(phoneNumber)) {
+                document.getElementById("phone-error").innerHTML = "Please enter a valid 10-digit phone number.";
+                return false;
+            }
+
+            if (!affirmationCheckbox.checked) {
+                document.getElementById("affirmation-error").innerHTML = "Please affirm that the above information is true.";
+                return false;
+            }
+
+            // If all validations pass, construct the URL with form data
+            var formData = {
+        name: name,
+        email: email,
+        dob: document.getElementById("dob").value,
+        gender: genderSelected.value,
+        blood_group: bloodGroup,
+        education: educationqualification,
+        branch: document.getElementById("branch").value,
+        address: document.getElementById("address").value,
+        phone: phoneNumber
+    };
+
+    var queryString = Object.keys(formData).map(function(key) {
+        return key + '=' + encodeURIComponent(formData[key]);
+    }).join('&');
+
+    // Redirect to the next page with form data in the URL
+    window.location.href = 'next_page.html?' + queryString;
+
+    // Prevent default form submission
+    return false;
+}   
+ </script>
+</body>
+</html>
